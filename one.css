@@ -690,7 +690,9 @@ transform:translateX(0);
 
 }
 
-
+.hero-image {
+	margin-top:50px;
+}
 
 .hero-image img{
 

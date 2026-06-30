@@ -70,13 +70,10 @@ body{
 
 
 
-.navbar{
-
-    display:flex;
-
-    gap:30px;
-
-}
+.navbar {
+	display:flex;
+	gap:30px;
+	}
 
 
 .navbar a{
@@ -718,5 +715,72 @@ section h2{
 
 }
 
+
+}
+
+/* Light mode */
+
+body.light-mode{
+
+    background:#f8fafc;
+
+    color:#0f172a;
+
+}
+
+
+
+body.light-mode .header{
+
+    background:rgba(255,255,255,0.8);
+
+}
+
+
+
+body.light-mode .navbar a{
+
+    color:#0f172a;
+
+}
+
+
+
+body.light-mode .about-container,
+body.light-mode .skill-card,
+body.light-mode .project-card{
+
+    background:white;
+
+    color:#0f172a;
+
+}
+
+
+
+body.light-mode input,
+body.light-mode textarea{
+
+    background:white;
+
+    color:#0f172a;
+
+}
+
+
+
+#theme-toggle{
+
+    border:none;
+
+    background:#38bdf8;
+
+    padding:10px 15px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:20px;
 
 }

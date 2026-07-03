@@ -812,3 +812,47 @@ font-size:32px;
 
 
 }
+
+/* =========================
+   BACK TO TOP BUTTON
+========================= */
+
+#backToTop{
+
+    position:fixed;
+
+    bottom:30px;
+
+    right:30px;
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    display:none;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+#backToTop:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 10px 20px rgba(56,189,248,.5);
+
+}

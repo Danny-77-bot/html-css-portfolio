@@ -401,3 +401,34 @@ backToTop.addEventListener("click", () => {
     });
 
 });
+
+
+/* =========================
+   ANIMATED SKILL BARS
+========================= */
+
+const skillSection = document.querySelector("#skills");
+const progressBars = document.querySelectorAll(".progress");
+
+let skillsAnimated = false;
+
+window.addEventListener("scroll", () => {
+
+    const sectionTop = skillSection.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 150;
+
+    if(sectionTop < triggerPoint && !skillsAnimated){
+
+        progressBars.forEach(bar => {
+
+            const width = getComputedStyle(bar).getPropertyValue("--progress");
+
+            bar.style.width = width;
+
+        });
+
+        skillsAnimated = true;
+
+    }
+
+});

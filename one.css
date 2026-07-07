@@ -952,3 +952,57 @@ font-size:32px;
     --progress:80%;
 
 }
+
+/* =========================
+   PROJECT FILTER
+========================= */
+
+.filter-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:40px;
+
+}
+
+.filter-btn{
+
+    padding:12px 24px;
+
+    border:none;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    background:#1e293b;
+
+    color:white;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.filter-btn:hover{
+
+    background:#38bdf8;
+
+    color:#020617;
+
+}
+
+.filter-btn.active{
+
+    background:#38bdf8;
+
+    color:#020617;
+
+}

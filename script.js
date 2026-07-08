@@ -473,3 +473,38 @@ filterButtons.forEach(button => {
     });
 
 });
+
+/* =========================
+   PROJECT SEARCH
+========================= */
+
+const searchInput = document.getElementById("project-search");
+
+searchInput.addEventListener("keyup", () => {
+
+    const searchValue = searchInput.value.toLowerCase();
+
+    projects.forEach(project => {
+
+        const title =
+            project.querySelector("h3").textContent.toLowerCase();
+
+        const description =
+            project.querySelector("p").textContent.toLowerCase();
+
+        if (
+            title.includes(searchValue) ||
+            description.includes(searchValue)
+        ) {
+
+            project.style.display = "block";
+
+        } else {
+
+            project.style.display = "none";
+
+        }
+
+    });
+
+});

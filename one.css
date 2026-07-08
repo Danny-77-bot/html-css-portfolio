@@ -1006,3 +1006,47 @@ font-size:32px;
     color:#020617;
 
 }
+
+/* =========================
+   PROJECT SEARCH
+========================= */
+
+.search-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:35px;
+
+}
+
+#project-search{
+
+    width:100%;
+
+    max-width:450px;
+
+    padding:14px 20px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:30px;
+
+    background:#1e293b;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+#project-search:focus{
+
+    box-shadow:0 0 15px rgba(56,189,248,.5);
+
+}

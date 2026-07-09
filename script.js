@@ -508,3 +508,71 @@ searchInput.addEventListener("keyup", () => {
     });
 
 });
+
+/* =========================
+   CONTACT FORM VALIDATION
+========================= */
+
+const contactForm = document.getElementById("contact-form");
+const formMessage = document.getElementById("form-message");
+
+contactForm.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
+
+    // Remove previous styles
+    [name, email, message].forEach(field => {
+        field.classList.remove("error-field", "success-field");
+    });
+
+    formMessage.classList.remove("success", "error");
+
+    // Trim spaces
+    const nameValue = name.value.trim();
+    const emailValue = email.value.trim();
+    const messageValue = message.value.trim();
+
+    // Empty fields
+    if(nameValue === "" || emailValue === "" || messageValue === ""){
+
+        formMessage.textContent = "Please fill in all fields.";
+
+        formMessage.classList.add("error");
+
+        if(nameValue === "") name.classList.add("error-field");
+        if(emailValue === "") email.classList.add("error-field");
+        if(messageValue === "") message.classList.add("error-field");
+
+        return;
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailPattern.test(emailValue)){
+
+        formMessage.textContent = "Please enter a valid email address.";
+
+        formMessage.classList.add("error");
+
+        email.classList.add("error-field");
+
+        return;
+    }
+
+    // Success
+    [name, email, message].forEach(field => {
+        field.classList.add("success-field");
+    });
+
+    formMessage.textContent = "Message sent successfully!";
+
+    formMessage.classList.add("success");
+
+    contactForm.reset();
+
+});

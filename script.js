@@ -576,3 +576,41 @@ contactForm.addEventListener("submit", function(event){
     contactForm.reset();
 
 });
+
+
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+const cursor = document.querySelector(".cursor");
+const cursorDot = document.querySelector(".cursor-dot");
+
+document.addEventListener("mousemove",(e)=>{
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    cursorDot.style.left = e.clientX + "px";
+    cursorDot.style.top = e.clientY + "px";
+
+});
+
+const interactiveElements = document.querySelectorAll(
+    "a, button, input, textarea"
+);
+
+interactiveElements.forEach(element=>{
+
+    element.addEventListener("mouseenter",()=>{
+
+        cursor.classList.add("cursor-grow");
+
+    });
+
+    element.addEventListener("mouseleave",()=>{
+
+        cursor.classList.remove("cursor-grow");
+
+    });
+
+});

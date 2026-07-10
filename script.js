@@ -1,632 +1,164 @@
 /* =========================
-   THEME TOGGLE
+   STEP 5 - DELETE TRANSACTIONS
 ========================= */
 
+// Form Elements
 
-const themeButton = document.getElementById("theme-toggle");
+const form = document.getElementById("transaction-form");
 
-const body = document.body;
+const description = document.getElementById("description");
 
+const amount = document.getElementById("amount");
 
-// Load saved theme
+const type = document.getElementById("type");
 
-const savedTheme = localStorage.getItem("theme");
+const transactionList = document.getElementById("transaction-list");
 
+// Summary Cards
 
-if(savedTheme === "light"){
+const balance = document.getElementById("balance");
 
-    body.classList.add("light");
+const income = document.getElementById("income");
 
-    themeButton.textContent="☀️";
+const expense = document.getElementById("expense");
 
-}
+// Store Transactions
 
+const transactions = [];
 
+// =========================
+// Update Summary
+// =========================
 
-// Change theme
+function updateSummary(){
 
-themeButton.addEventListener("click",()=>{
+    let totalIncome = 0;
 
+    let totalExpense = 0;
 
-    body.classList.toggle("light");
+    transactions.forEach(transaction => {
 
+        if(transaction.type === "income"){
 
+            totalIncome += transaction.amount;
 
-    if(body.classList.contains("light")){
+        }else{
 
-
-        localStorage.setItem("theme","light");
-
-        themeButton.textContent="☀️";
-
-
-    }
-    else{
-
-
-        localStorage.setItem("theme","dark");
-
-        themeButton.textContent="🌙";
-
-
-    }
-
-
-});
-
-
-
-
-
-
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-
-const menuBtn = document.getElementById("menu-btn");
-
-const navbar = document.querySelector(".navbar");
-
-
-
-menuBtn.addEventListener("click",()=>{
-
-
-    navbar.classList.toggle("active");
-
-
-    if(navbar.classList.contains("active")){
-
-
-        menuBtn.textContent="✖";
-
-
-    }
-    else{
-
-
-        menuBtn.textContent="☰";
-
-
-    }
-
-
-
-});
-
-
-
-
-// close menu when clicking link
-
-
-document.querySelectorAll(".navbar a")
-.forEach(link=>{
-
-
-link.addEventListener("click",()=>{
-
-
-navbar.classList.remove("active");
-
-menuBtn.textContent="☰";
-
-
-});
-
-
-});
-
-
-
-
-
-
-
-
-
-/* =========================
-   TYPING EFFECT
-========================= */
-
-
-
-const typingText =
-document.getElementById("typing");
-
-
-
-const words=[
-
-"MERN Stack Developer",
-
-"Frontend Developer",
-
-"Full Stack Developer",
-
-"Problem Solver"
-
-];
-
-
-
-let wordIndex=0;
-
-let charIndex=0;
-
-let deleting=false;
-
-
-
-function typeEffect(){
-
-
-let currentWord = words[wordIndex];
-
-
-
-if(!deleting){
-
-
-typingText.textContent =
-currentWord.substring(0,charIndex++);
-
-
-
-if(charIndex > currentWord.length){
-
-
-deleting=true;
-
-setTimeout(typeEffect,1000);
-
-return;
-
-}
-
-
-
-}
-else{
-
-
-typingText.textContent =
-currentWord.substring(0,charIndex--);
-
-
-
-if(charIndex===0){
-
-
-deleting=false;
-
-
-wordIndex++;
-
-
-if(wordIndex===words.length){
-
-wordIndex=0;
-
-}
-
-
-}
-
-
-
-}
-
-
-
-setTimeout(typeEffect,100);
-
-
-}
-
-
-
-typeEffect();
-
-
-
-
-
-
-
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-
-
-const sections =
-document.querySelectorAll(".section");
-
-
-
-window.addEventListener("scroll",()=>{
-
-
-sections.forEach(section=>{
-
-
-const position =
-section.getBoundingClientRect().top;
-
-
-
-const screenHeight =
-window.innerHeight;
-
-
-
-if(position < screenHeight - 100){
-
-
-section.style.opacity="1";
-
-section.style.transform="translateY(0)";
-
-
-}
-
-
-});
-
-
-});
-
-
-
-
-
-// initial hidden style
-
-
-sections.forEach(section=>{
-
-
-section.style.opacity="0";
-
-section.style.transform="translateY(50px)";
-
-section.style.transition=".8s";
-
-
-});
-
-
-
-
-
-
-
-
-/* =========================
- ACTIVE NAV LINK
-========================= */
-
-
-const allSections =
-document.querySelectorAll("section");
-
-
-const navLinks =
-document.querySelectorAll(".navbar a");
-
-
-
-window.addEventListener("scroll",()=>{
-
-
-let current="";
-
-
-
-allSections.forEach(section=>{
-
-
-const sectionTop =
-section.offsetTop - 150;
-
-
-
-if(scrollY >= sectionTop){
-
-current = section.getAttribute("id");
-
-}
-
-
-});
-
-
-
-navLinks.forEach(link=>{
-
-
-link.style.color="white";
-
-
-
-if(link.getAttribute("href") === "#"+current){
-
-
-link.style.color="#38bdf8";
-
-
-}
-
-
-});
-
-
-
-});
-
-/* =========================
-   BACK TO TOP BUTTON
-========================= */
-
-const backToTop = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 300){
-
-        backToTop.style.display = "block";
-
-    }else{
-
-        backToTop.style.display = "none";
-
-    }
-
-});
-
-backToTop.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-});
-
-
-/* =========================
-   ANIMATED SKILL BARS
-========================= */
-
-const skillSection = document.querySelector("#skills");
-const progressBars = document.querySelectorAll(".progress");
-
-let skillsAnimated = false;
-
-window.addEventListener("scroll", () => {
-
-    const sectionTop = skillSection.getBoundingClientRect().top;
-    const triggerPoint = window.innerHeight - 150;
-
-    if(sectionTop < triggerPoint && !skillsAnimated){
-
-        progressBars.forEach(bar => {
-
-            const width = getComputedStyle(bar).getPropertyValue("--progress");
-
-            bar.style.width = width;
-
-        });
-
-        skillsAnimated = true;
-
-    }
-
-});
-
-
-/* =========================
-   PROJECT FILTERING
-========================= */
-
-const filterButtons = document.querySelectorAll(".filter-btn");
-const projects = document.querySelectorAll(".project");
-
-filterButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        filterButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-        button.classList.add("active");
-
-        const filter = button.dataset.filter;
-
-        projects.forEach(project => {
-
-            if (
-                filter === "all" ||
-                project.dataset.category === filter
-            ) {
-
-                project.style.display = "block";
-
-            } else {
-
-                project.style.display = "none";
-
-            }
-
-        });
-
-    });
-
-});
-
-/* =========================
-   PROJECT SEARCH
-========================= */
-
-const searchInput = document.getElementById("project-search");
-
-searchInput.addEventListener("keyup", () => {
-
-    const searchValue = searchInput.value.toLowerCase();
-
-    projects.forEach(project => {
-
-        const title =
-            project.querySelector("h3").textContent.toLowerCase();
-
-        const description =
-            project.querySelector("p").textContent.toLowerCase();
-
-        if (
-            title.includes(searchValue) ||
-            description.includes(searchValue)
-        ) {
-
-            project.style.display = "block";
-
-        } else {
-
-            project.style.display = "none";
+            totalExpense += transaction.amount;
 
         }
 
     });
 
-});
+    balance.textContent = "$" + (totalIncome - totalExpense).toFixed(2);
 
-/* =========================
-   CONTACT FORM VALIDATION
-========================= */
+    income.textContent = "+$" + totalIncome.toFixed(2);
 
-const contactForm = document.getElementById("contact-form");
-const formMessage = document.getElementById("form-message");
+    expense.textContent = "-$" + totalExpense.toFixed(2);
 
-contactForm.addEventListener("submit", function(event){
+}
+
+// =========================
+// Delete Transaction
+// =========================
+
+function deleteTransaction(index, listItem){
+
+    transactions.splice(index, 1);
+
+    listItem.remove();
+
+    if(transactions.length === 0){
+
+        transactionList.innerHTML = `
+            <li class="empty">
+                No transactions available.
+            </li>
+        `;
+
+    }
+
+    updateSummary();
+
+}
+
+// =========================
+// Add Transaction
+// =========================
+
+form.addEventListener("submit", function(event){
 
     event.preventDefault();
 
-    const name = document.getElementById("name");
-    const email = document.getElementById("email");
-    const message = document.getElementById("message");
+    const descriptionValue = description.value.trim();
 
-    // Remove previous styles
-    [name, email, message].forEach(field => {
-        field.classList.remove("error-field", "success-field");
-    });
+    const amountValue = Number(amount.value);
 
-    formMessage.classList.remove("success", "error");
+    const typeValue = type.value;
 
-    // Trim spaces
-    const nameValue = name.value.trim();
-    const emailValue = email.value.trim();
-    const messageValue = message.value.trim();
+    if(descriptionValue === "" || amountValue <= 0){
 
-    // Empty fields
-    if(nameValue === "" || emailValue === "" || messageValue === ""){
-
-        formMessage.textContent = "Please fill in all fields.";
-
-        formMessage.classList.add("error");
-
-        if(nameValue === "") name.classList.add("error-field");
-        if(emailValue === "") email.classList.add("error-field");
-        if(messageValue === "") message.classList.add("error-field");
+        alert("Please enter valid information.");
 
         return;
+
     }
 
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const empty = document.querySelector(".empty");
 
-    if(!emailPattern.test(emailValue)){
+    if(empty){
 
-        formMessage.textContent = "Please enter a valid email address.";
+        empty.remove();
 
-        formMessage.classList.add("error");
-
-        email.classList.add("error-field");
-
-        return;
     }
 
-    // Success
-    [name, email, message].forEach(field => {
-        field.classList.add("success-field");
-    });
+    const transaction = {
 
-    formMessage.textContent = "Message sent successfully!";
+        description: descriptionValue,
 
-    formMessage.classList.add("success");
+        amount: amountValue,
 
-    contactForm.reset();
+        type: typeValue
 
-});
+    };
 
+    transactions.push(transaction);
 
-/* =========================
-   CUSTOM CURSOR
-========================= */
+    const index = transactions.length - 1;
 
-const cursor = document.querySelector(".cursor");
-const cursorDot = document.querySelector(".cursor-dot");
+    const li = document.createElement("li");
 
-document.addEventListener("mousemove",(e)=>{
+    li.style.display = "flex";
 
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+    li.style.justifyContent = "space-between";
 
-    cursorDot.style.left = e.clientX + "px";
-    cursorDot.style.top = e.clientY + "px";
+    li.style.alignItems = "center";
 
-});
+    li.innerHTML = `
+        <div>
+            <strong>${descriptionValue}</strong><br>
+            <span style="color:${typeValue==="income" ? "green" : "red"}">
+                ${typeValue==="income" ? "+" : "-"}$${amountValue.toFixed(2)}
+            </span>
+        </div>
 
-const interactiveElements = document.querySelectorAll(
-    "a, button, input, textarea"
-);
+        <button class="delete-btn">
+            Delete
+        </button>
+    `;
 
-interactiveElements.forEach(element=>{
+    const deleteButton = li.querySelector(".delete-btn");
 
-    element.addEventListener("mouseenter",()=>{
+    deleteButton.addEventListener("click", function(){
 
-        cursor.classList.add("cursor-grow");
-
-    });
-
-    element.addEventListener("mouseleave",()=>{
-
-        cursor.classList.remove("cursor-grow");
+        deleteTransaction(index, li);
 
     });
 
-});
+    transactionList.appendChild(li);
 
-/* =========================
-   PRELOADER
-========================= */
+    updateSummary();
 
-const preloader = document.getElementById("preloader");
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-
-        preloader.classList.add("preloader-hide");
-
-    }, 1200);
+    form.reset();
 
 });
